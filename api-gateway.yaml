@@ -1,0 +1,24 @@
+server:
+  port: 8087
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: lb://user-service
+              predicates:
+                - Path=/api/users/**
+
+            - id: inventory-service
+              uri: lb://inventory-service
+              predicates: 
+                - Path=/api/inventory/**
+
+            - id: order-service
+              uri: lb://order-service
+              predicates: 
+                - Path=/api/orders/**
+             
